@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button'
-import firebase from './initializers/firebase';
-import { Avatar, withStyles, IconButton } from '@material-ui/core';
-import ExitToApp from '@material-ui/icons/ExitToApp';
+import firebase from '../initializers/firebase';
 
 import { connect } from 'react-redux';
-import { saveToken, clearToken } from './initializers/actions';
+import { saveToken, clearToken } from '../initializers/actions';
+import AuthElements from '../components/AuthElements';
+
+
 
 class Login extends Component {
     constructor(props) {
@@ -13,39 +13,12 @@ class Login extends Component {
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
 
-        this.state = {
-            userLoggedIn: false,
-            photoURL: ''
-        }
-    }
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged((user) => {
-            console.log(user);
-            if (user) {
-                this.setState({
-                    userLoggedIn: true,
-                    photoURL: user.providerData[0].photoURL,
-                })
-            } else {
-                this.setState({
-                    userLoggedIn: false,
-                    photoURL: '',
-                })
-            }
-        })
+
     }
     logout() {
         firebase.auth().signOut().then(() => {
             this.props.clearToken();
         }).catch(console.log);
-    }
-    logInButton() {
-        if (this.state.userLoggedIn) return (
-            [<Avatar src={this.state.photoURL} />, (<IconButton color="inherit" onClick={this.logout}> <ExitToApp /></IconButton>)]
-        );
-        return (<Button variant="contained" onClick={this.login}>
-            Iniciar Sesion con Google
-              </Button>);
     }
     login() {
         let provider = new firebase.auth.GoogleAuthProvider();
@@ -62,16 +35,18 @@ class Login extends Component {
     }
     render() {
         return (
-            <div >
-                <p>{this.props.token}</p>
-                {this.logInButton()}
-            </div>
+            <AuthElements
+                login={this.login}
+                logout={this.logout}
+                user={this.props.user}
+            />
         )
     }
 }
 const mapStateToProps = (state) => {
     return {
-        token: state.token
+        token: state.token,
+        user: state.user,
     }
 }
 //const saveToken = (token) => {

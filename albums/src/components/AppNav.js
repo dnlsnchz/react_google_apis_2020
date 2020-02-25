@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppBar, Toolbar, withStyles, Typography } from '@material-ui/core';
-import Login from '../login';
+import Login from '../containers/Login';
 
 class AppNav extends Component {
     render() {

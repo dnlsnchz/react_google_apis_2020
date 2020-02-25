@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core';
-import Login from './login';
+import Login from './containers/Login';
 import AppNav from './components/AppNav';
 
 class App extends Component {
