@@ -3,8 +3,10 @@
     "",
     "\\src",
     "\\src\\components",
+    "\\src\\containers",
+    "\\src\\data",
     "\\src\\initializers"
   ],
-  "SelectedNode": "\\src\\index.js",
+  "SelectedNode": "\\src\\containers\\Albums.js",
   "PreviewInSolutionExplorer": false
 }

@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, compose } from 'redux'
+import persistState from 'redux-localstorage';
 
 function tokenReducer(state = '', action) {
     switch (action.type) {
@@ -21,9 +22,33 @@ function userReducer(state = null, action) {
     }
 }
 
+function albumsReducer(state = [], action) {
+    switch (action.type) {
+        case 'SET_ALBUMS':
+            return action.albums;
+        case 'CLEAR_ALBUMS':
+            return [];
+        default:
+            return state;
+    }
+}
+
+function albumReducer(state = null, action) {
+    switch (action.type) {
+        case 'SET_ALBUM':
+            return action.album;
+        case 'CLEAR_ALBUM':
+            return null;
+        default:
+            return state;
+    }
+}
 let rootReducer = combineReducers({
     token: tokenReducer,
-    user: userReducer
+    user: userReducer,
+    albums: albumsReducer,
+    mainAlbum: albumReducer
 });
 
-export default createStore(rootReducer);
+let mainEnhancer = compose(persistState('token'));
+export default createStore(rootReducer, {}, mainEnhancer);

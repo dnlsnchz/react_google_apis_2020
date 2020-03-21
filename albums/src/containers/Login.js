@@ -15,6 +15,9 @@ class Login extends Component {
 
 
     }
+    componentDidMount() {
+        console.log(this.props.token);
+    }
     logout() {
         firebase.auth().signOut().then(() => {
             this.props.clearToken();
