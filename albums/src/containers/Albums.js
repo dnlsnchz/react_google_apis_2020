@@ -6,7 +6,13 @@ import AlbumsList from '../components/AlbumsList';
 
 
 class Albums extends Component {
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            showAlbums: false,
+        }
+    }
     componentDidMount() {
         //this.loadPhotos();
         if (process.env.NODE_ENV == 'production') {
@@ -17,6 +23,9 @@ class Albums extends Component {
                 this.props.setAlbums(module.default.albums);
             })
         }
+        setTimeout(() => this.setState({
+           showAlbums: true
+        }), 5000);
     }
 
     loadPhotos() {
@@ -33,8 +42,7 @@ class Albums extends Component {
     }
 
     render() {
-        return ([(this.props.mainAlbum ? this.props.mainAlbum.title : ''),
-        <AlbumsList setAlbum={this.props.setAlbum} albums={this.props.albums} />]);
+        return <AlbumsList setAlbum={this.props.setAlbum} albums={this.props.albums} />;
     }
 }
 

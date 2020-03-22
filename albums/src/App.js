@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core';
 import Login from './containers/Login';
 import AppNav from './components/AppNav';
 import Albums from './containers/Albums';
+import Album from './containers/Album';
 
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
         return (
             <div className="App">
                 <AppNav />
+                <Album />
                 <Albums />
             </div>
         );
