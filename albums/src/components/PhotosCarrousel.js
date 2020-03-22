@@ -37,7 +37,7 @@ export default withStyles({
     },
     img: {
         maxWidth: '100%',
-        height: 'auto'
+        height: 'auto',
     },
     card: {
         minWidth: '300px',
