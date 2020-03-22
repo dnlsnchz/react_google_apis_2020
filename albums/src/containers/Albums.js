@@ -23,9 +23,7 @@ class Albums extends Component {
                 this.props.setAlbums(module.default.albums);
             })
         }
-        setTimeout(() => this.setState({
-           showAlbums: true
-        }), 5000);
+        //setTimeout(() => this.props.clearAlbums(), 5000);
     }
 
     loadPhotos() {
@@ -42,7 +40,11 @@ class Albums extends Component {
     }
 
     render() {
-        return <AlbumsList setAlbum={this.props.setAlbum} albums={this.props.albums} />;
+        return ( <AlbumsList
+            mainAlbum={this.props.mainAlbum}
+            setAlbum={this.props.setAlbum}
+            albums={this.props.albums}
+        />);
     }
 }
 

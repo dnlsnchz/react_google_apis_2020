@@ -1,19 +1,31 @@
-import React, { Component } from 'react';
+Ôªøimport React, { Component } from 'react';
 import { withStyles, Typography, Button } from '@material-ui/core';
 import PhotosCarrousel from './PhotosCarrousel';
 
 
 function PhotosList(props) {
+    function clear() {
+        props.clearAlbum();
+        props.clearPhotos();
+    }
     return (
-        <div>
-            {props.album && [
-                <Typography variant="h4" component="h2" >{props.album ? props.album.title : ""}</Typography>,
-                <Button>Regresar atr·s</Button>,
-                <Typography variant="headline" component="h2" >Fotos del ·lbum</Typography>,
-                <Typography variant="caption" component="p" >{props.photos.length} foto(s) en este ·lbum</Typography>,
-                <PhotosCarrousel photos={props.photos} />
-            ]}
+        <div className={props.classes.topSpace}>
+            {
+                props.album && [
+                    <Typography key="album-title" variant="h4" component="h2" >{props.album ? props.album.title : ""}</Typography>,
+                    <Button key="album-back-button" onClick={clear}>Regresar atr√°s</Button>,
+                    <Typography key="album-subtitle" variant="headline" component="h2" >Fotos del √°lbum</Typography>,
+                    <Typography key="caption" variant="caption" component="p" >{props.photos.length} foto(s) en este √°lbum</Typography>,
+
+                ]
+            }
+            <PhotosCarrousel photos={props.photos} />
         </div>
     )
 }
-export default withStyles({})(PhotosList);
+export default withStyles({
+    topSpace: {
+        marginTop: '2em'
+    }
+
+})(PhotosList);

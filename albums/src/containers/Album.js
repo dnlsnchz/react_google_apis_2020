@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setPhotos, clearPhotos } from '../initializers/actions';
+import { setPhotos, clearPhotos, clearAlbum } from '../initializers/actions';
 import axios from 'axios';
 import PhotosList from '../components/PhotosList';
 
@@ -8,15 +8,17 @@ import PhotosList from '../components/PhotosList';
 class Album extends Component {
 
     componentDidUpdate(prevProps) {
-        if (this.props.mainAlbum) {
-            if (true) {//process.env.NODE_ENV === "production"
+        console.log("componentDidUpdate", prevProps);
+        console.log("this.props.mainAlbum", this.props.mainAlbum);
+        if (this.props.mainAlbum && prevProps.mainAlbum !== this.props.mainAlbum) {
+            if (process.env.NODE_ENV === "production") {
                 this.loadPhotos();
             } else {
                 import('../data/photos').then(module => {
                     this.props.setPhotos(module.default.mediaItems);
                 })
             }
-            
+
         }
     }
 
@@ -32,13 +34,17 @@ class Album extends Component {
             }
         }).then(
             r => {
-                console.log(r);
                 this.props.setPhotos(r.data.mediaItems);
             }).catch(console.log);
     }
 
     render() {
-        return (<PhotosList album={this.props.mainAlbum} photos={this.props.photos}/>)
+        return (<PhotosList
+            clearAlbum={this.props.clearAlbum}
+            clearPhotos={this.props.clearPhotos}
+            album={this.props.mainAlbum}
+            photos={this.props.photos}
+        />);
     }
 }
 const mapStateToProps = (state) => ({
@@ -49,6 +55,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     setPhotos,
+    clearAlbum,
     clearPhotos
 }
 
