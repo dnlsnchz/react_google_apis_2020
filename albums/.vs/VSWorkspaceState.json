@@ -1,12 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\public",
     "\\src",
+    "\\src\\animations",
     "\\src\\components",
-    "\\src\\containers",
     "\\src\\data",
     "\\src\\initializers"
   ],
-  "SelectedNode": "\\src\\containers\\Albums.js",
+  "SelectedNode": "\\src\\components\\PhotosCarrousel.js",
   "PreviewInSolutionExplorer": false
 }
